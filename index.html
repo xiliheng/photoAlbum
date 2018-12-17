@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="swiper.min.css">
+ <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+   		     $(document).ready(function(){
+            	autoPlayMusic();
+            	audioAutoPlay();
+        });
+   </script>
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .swiper-wrapper div img{width: 100%;}
+    .swiper-slide{background: url(910321816951606950.jpg) no-repeat;width: 100%;height: 100%;background-size: 100% 100%;}
+  	.swiper-button-prev{background: url("32_03.png") no-repeat; background-size: 100%;width: 3rem;height:3rem;}
+  	.swiper-button-next{background: url("32_03.png") no-repeat; background-size: 100%;width: 3rem;height: 3rem;}
+  	.swiper-slide .rcts{position: absolute;top:0}
+  	/*音乐*/
+@keyframes myAni {
+				0% {
+					transform: rotate(0deg);
+					}
+				100% {
+					transform: rotate(360deg);
+					}
+			}
+.bgm-btn-wraper{
+	    position: absolute;
+    	z-index: 999;
+    	width: 30px;
+    	height: 30px;
+    	right: 18px;
+    	top: 20px;
+    	
+}
+.bgm-btn{
+	    right: 0;
+    	top: 0;
+    	background-image: url(music.svg);
+    	background-size: contain;
+    	background-repeat: no-repeat;
+    	position: absolute;
+    	z-index: 200;
+    	width: 30px;
+    	height: 30px;
+    	/*transform: translate(-50%, -50%);*/
+}
+.play{
+	animation: myAni 2s infinite linear;
+}
+  </style>
+</head>
+<body style="background: #0e0923;">
+  <!-- Swiper -->
+  		<div class="bgm-btn-wraper play" style="display: block;">
+      				<div class="bgm-btn rotate" >
+      					
+      				</div>
+      </div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="1.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="2.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="3.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="4.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="5.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="6.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="7.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="8.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+      <div class="swiper-slide"><img src="9.jpg"/><img class="rcts" src="o_1cc0bngjpauuotn1gd21192fs924.gif"/></div>
+    </div>
+    <!-- Add Pagination -->
+<!--    <div class="swiper-pagination"></div>-->
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+<audio style="display:none; height: 0" id="bg-music" preload="auto" src="Socan.mp3"></audio>
+  <!-- Swiper JS -->
+  <script src="swiper.min.js"></script>
+
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    //音乐播放
+	$(".bgm-btn-wraper").click(function(){
+	controlAudioPlayer();
+	})
+
+
+function controlAudioPlayer() {	
+//	alert(1)
+        var player = $("audio")[0];
+        if(player){
+//      	alert(player.paused+"-"+player.play)
+            if(player.paused){
+//          	alert(3)
+            	$(".bgm-btn-wraper").addClass('play');
+                player.play();
+                
+            }else{
+//          	alert(4)
+                player.pause();
+                $(".bgm-btn-wraper").css('transform',$(".bgm-btn-wraper").css("transform"));
+                $(".bgm-btn-wraper").removeClass('play');
+            }
+        }
+    }	
+     function audioAutoPlay() {
+            var audio = document.getElementById('bg-music');
+            audio.play();
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                audio.play();
+            }, false);
+        }
+        // 音乐播放
+        function autoPlayMusic() {
+            // 自动播放音乐效果，解决浏览器或者APP自动播放问题
+            function musicInBrowserHandler() {
+                musicPlay(true);
+                document.body.removeEventListener('touchstart', musicInBrowserHandler);
+            }
+            document.body.addEventListener('touchstart', musicInBrowserHandler);
+            // 自动播放音乐效果，解决微信自动播放问题
+            function musicInWeixinHandler() {
+                musicPlay(true);
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    musicPlay(true);
+                }, false);
+                document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+            }
+            document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+        }
+        function musicPlay(isPlay) {
+            var media = document.querySelector('#bg-music');
+            if (isPlay && media.paused) {
+                media.play();
+            }
+            if (!isPlay && !media.paused) {
+                media.pause();
+            }
+        }
+  </script>
+</body>
+</html>
